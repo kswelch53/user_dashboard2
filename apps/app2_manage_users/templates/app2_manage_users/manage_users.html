@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app2_manage_users/css/style.css' %}" media="screen" title="no title">
+    <title>Manage Users</title>
+  </head>
+  <body>
+    <!-- <h1>This is manage_users.html in app2</h1> -->
+
+      <!-- <h1>Manage Users</h1> -->
+
+<!-- page header and anchor link styled like a button, aligned horizontally -->
+    <div class="header">
+      <p><h1 class="one_line">Manage Users</h1><a href="{% url 'admins:add_user' %}">Add New</a></p>
+    </div>
+
+<!-- coding for a page header and an actual form button, aligned horizontally -->
+    <!-- <div class="header"> -->
+      <!-- <form action="{% url 'admins:add_user' %}" method="POST" id="addnew"> -->
+        <!-- {% csrf_token %} -->
+
+        <!-- <h1 class="one_line">Manage Users</h1> -->
+        <!-- <button class="one_inline" type="submit" form="addnew" value="">Add New</button> -->
+      <!-- </form> -->
+    <!-- </div> -->
+
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>email</th>
+            <th>created at</th>
+            <th>user_level</th>
+            <th>actions</th>
+          </tr>
+        </thead>
+
+
+        {% for user in users %}
+          <tr>
+            <td>{{ user.id }}</td>
+            <td><a href="{% url 'messages:profile' id=user.id %}"> {{ user.first_name }} {{ user.last_name }}</a></td>
+            <td>{{ user.email }} </td>
+            <td>{{ user.created_at }}</td>
+            <td>{{ user.level }}</td>
+
+
+<!-- Routes admins to functions for editing and deleting users -->
+            <td><a href="{% url 'admins:edit_user' id=user.id %}">Edit</a> <a href="{% url 'admins:check' id=user.id %}">Remove</a></td>
+
+          </tr>
+        {% endfor %}
+
+      </table>
+    </div>
+
+    <!-- page header and anchor link styled like a button, aligned horizontally -->
+    <div class="footer">
+      <p><a href="{% url 'loginreg:index' %}">Home</a></p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app1_login_register/css/style.css' %}" media="screen" title="no title">
+    <title>App 1 index page</title>
+  </head>
+  <body>
+    <div class="wrapper">
+
+      <div class="header">
+        <h1>Welcome to the User's Dashboard!</h1>
+      </div>
+
+      <div class="centerwrap">
+
+        <div class="nav">
+          <h2>This is the navigation bar</h2>
+          <p><a href="{% url 'loginreg:login' %}">Log in</a></p>
+          <p><a href="{% url 'loginreg:register' %}">Register</a></p>
+
+          <!-- links to manage_users.html in App 2 -->
+          <p><a href="{% url 'admins:index' %}">Administrators</a></p>
+          <!-- links to all_users.html in App 3 -->
+          <p><a href="{% url 'messages:all_users' %}">All Users</a></p>
+
+          <p><a href="{% url 'loginreg:logout' %}">Log out</a></p>
+<!-- Needs a goodbye message -->
+
+        </div>
+
+        <div class="main">
+          <h2>This is the main bar</h2>
+          <h4>Here are paragraphs of information on what this website is about.</h4>
+          <h4>Here are paragraphs of information on what this website is about.</h4>
+        </div>
+
+      </div><!--centerwrap end div-->
+
+      <div class="footer">
+        <h3>This is the footer</h3>
+      </div>
+
+    </div><!-- wrapper end div -->
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app3_messages/css/style.css' %}" media="screen" title="no title">
+    <title>Profile</title>
+  </head>
+  <body>
+
+<!-- displays user info on profile page -->
+    <div class="miniwrap">
+      <h1>{{ user.first_name }} {{ user.last_name }}
+        <h3>Registered at: {{ user.created_at }}</h3>
+        <h3>User ID: #{{ user.id }}</h3>
+        <h3>Email address:{{ user.email }}</h3>
+
+<!-- no input for description yet -->
+        <h3>Description: {{ description }}</h3>
+        <br>
+
+<!-- section where users post messages -->
+        <h2>Leave a message for {{ user.first_name }}</h2>
+<!-- form routes to app3 profile method, which redirects to user_posts method -->
+        <form action = "{% url 'messages:user_posts' id=user.id %}" method="POST">
+          {% csrf_token %}
+          <textarea name = "message" rows="4" cols="70"></textarea>
+          <button type="Submit" value="Post">Post</button>
+        </form>
+
+  <!-- no routing start -->
+        <div class = "messages">
+       <!-- This loop is posted messages -->
+       {% for posts in request.session.messages_list %}
+        <p> {{ response_to_views }}</p>
+       {% endfor %}
+        </div>
+
+<!-- no routing end -->
+    </div><!-- miniwrap end div -->
+  </body>
+</html>
+
+<!-- NOTES -->
+<!-- Description: (displays text entered by user) -->
+<!-- Leave a message for first_name (textarea field below with green Post button below that) -->
+
+<!-- Under this will be displayed any posted messages in textarea fields, with header: -->
+<!-- Name wrote (on left), _ hours ago (on right) -->
+
+<!-- There should also be functionality to leave posts on the posts; not sure how to do this -->

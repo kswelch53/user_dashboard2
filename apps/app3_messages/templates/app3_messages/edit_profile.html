@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app3_messages/css/style.css' %}" media="screen" title="no title">
+
+    <title>Edit Profile page</title>
+  </head>
+  <body>
+
+    <h1>Edit profile for {{ user.first_name }} {{ user.last_name }}</h1>
+    <div class="wrapper">
+      <div class="editbox">
+
+        <!-- Users can update their email address and name -->
+        <form action="{% url 'messages:edit_info' id=user.id %}" method="POST" id="edit_email">
+          {% csrf_token %}
+
+          <h2>Edit Information</h2>
+
+          <h4>Email Address:</h4>
+          <input type="text" name="email">
+          <h4>First Name:</h4>
+          <input type="text" name="first_name">
+          <h4>Last Name:</h4>
+          <input type="text" name="last_name">
+          <button type="submit" form="edit_email" value="">Save</button>
+        </form>
+
+      </div> <!-- edit box end div -->
+
+
+<!-- Users can update their password -->
+      <div class="editbox">
+
+        <form action="{% url 'messages:change_pw' id=user.id %}" method="POST" id="edit_pw">
+          {% csrf_token %}
+
+          <h2>Change Password</h2>
+
+          <h4>Password:</h4>
+          <input type="password" name="password">
+          <h4>Password Confirmation:</h4>
+          <input type="password" name="pw_confirm">
+          <button type="submit" form="edit_pw" value="">Update Password</button>
+
+      </div>
+
+
+<!-- The textarea data isn't submitting; don't know why -->
+<!-- Users can add a description  -->
+      <div class="footer">
+        <form action="{% url 'messages:edit_desc' id=user.id %}" method="POST" id="add_desc">
+          {% csrf_token %}
+
+          <h2>Edit Description</h2>
+          <textarea name = "message" rows="3" cols="75"></textarea>
+          <!-- <input type="textarea" name = "message" rows="3" cols="75"></textarea> -->
+          <button type="submit" form="add_desc" value="">Save</button>
+        </form>
+      </div>
+
+    </body>
+  </html>

@@ -1,0 +1,61 @@
+
+def user_posts(request, id):
+    print("This is the profile method in app3 views.py")
+    messages_list = list()
+    if request.method == 'POST':
+        request.session['messages_list'].append(messageslist)
+        # print(post_data['message'])
+    print("Profile method, user is:", id)
+    return redirect('messages:profile')
+
+
+# Not working yet
+# only logged-in users can make updates to their profile page
+def user_update(request):
+    if 'user_id' not in request.session:
+        print("User not in session")
+        return redirect('loginreg:index')
+    else:
+        print("User in session")
+        return render(request, 'app3_messages/profile.html')
+
+==================
+
+        <form action = "{% url 'messages:user_posts' id=user.id %}" method="POST">
+          {% csrf_token %}
+          <textarea name = "message" rows="3" cols="45"></textarea>
+          <button type="Submit" value="Post">Post</button>
+        </form>
+
+  <!-- no routing start -->
+        <div class = "messages">
+       <!-- This loop is posted messages -->
+       {% for posts in request.session.messages_list %}
+        <p> {{ response_to_views }}</p>
+       {% endfor %}
+        </div>
+
+  <!-- no routing end -->
+    </div><!-- miniwrap end div -->
+  </body>
+  </html>
+
+
+
+  def edit_desc(request, id):
+      print("This is edit_desc method in app3 views.py")
+      if request.method == 'POST':
+          # edit_desc = User_profile.objects.get(id=id)
+      return render(request, 'app3_messages/profile.html', context)
+
+
+
+      # Not working yet, may not be needed
+      # only logged-in users can make updates to their profile page
+      def user_update(request):
+          if 'user_id' not in request.session:
+              print("User not in session")
+              return redirect('loginreg:index')
+          else:
+              print("User in session")
+              return redirect('messages:user_posts')

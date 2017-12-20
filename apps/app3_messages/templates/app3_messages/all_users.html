@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app3_messages/css/style.css' %}" media="screen" title="no title">
+    <title>All Users</title>
+  </head>
+  <body>
+
+    <div class="tablewrap">
+      <h1>All Users</h1>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>email</th>
+            <th>created at</th>
+            <th>user_level</th>
+            </tr>
+        </thead>
+
+
+        {% for user in users %}
+          <tr>
+            <td>{{ user.id }}</td>
+            <td><a href="{% url 'messages:profile' id=user.id %}"> {{ user.first_name }} {{ user.last_name }}</a></td>
+            <td>{{ user.email }} </td>
+            <td>{{ user.created_at }}</td>
+            <td>{{ user.level }}</td>
+
+          </tr>
+        {% endfor %}
+
+      </table>
+
+
+      <div class="editprofile">
+
+        <p><a href="{% url 'loginreg:index' %}">Home</a></p>
+
+<!-- Link to Edit profile page -->
+        <p><a href="{% url 'messages:edit_profile' id=user_id %}"> {{ request.session.user.first_name }} Would you like to edit your profile?</a></p>
+
+<!-- Link to Manage Users page -->
+        <p><a href="{% url 'admins:index' %}">Manage Users (Administrators only)</a></p>
+
+      </div>
+
+
+    </div> <!-- tablewrap end div -->
+  </body>
+</html>
